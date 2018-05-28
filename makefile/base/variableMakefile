@@ -5,7 +5,9 @@ RM=rm -f
 CC=gcc
 
 $(TARGET):$(OBJS)
-	$(CC) -o $@ $^ $(CFLAGES)
+	$(CC) -o $(TARGET) $(OBJS) $(CFLAGES)
+$(OBJS):%.o:%.c
+	$(CC) -c $(CFLAGS) $< -o $@
 clean:
-	-$(RM) $(TARGET) $(OBJS) 
+	$(RM) $(TARGET) $(OBJS) 
 
