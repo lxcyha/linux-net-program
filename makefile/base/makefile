@@ -1,14 +1,12 @@
 TARGET=cacu
-CFLAGS=-O2
+CFLAGS=-O2 -Iadd -Isub
 CC=gcc
-export OBJSDIR=$(shell pwd)/objs
+DIRS=sub add .
+FILES=$(foreach dir,$(DIRS),$(wildcard $(dir)/*.c))
+OBJS=$(patsubst %.c,%.o,$(FILES))
 
-$(TARGET):$(OBJSDIR) main.o
-	$(MAKE) -C add
-	$(MAKE) -C sub
-	$(CC) -o $(TARGET) $(OBJSDIR)/*.o
-main.o:%.o:%.c
-	$(CC) -c $< -o $(OBJSDIR)/$@ $(CFLAGS) -Iadd -Isub
+$(TARGET):$(OBJS)
+	$(CC) -o $(TARGET) $(OBJS)
 clean:
 	-$(RM) $(TARGET) 
-	-$(RM) $(OBJSDIR)/*.o 
+	-$(RM) $(OBJS) 
