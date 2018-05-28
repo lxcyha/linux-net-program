@@ -1,0 +1,12 @@
+OBJS=add_int.o add_float.o sub_int.o sub_float.o main.o
+VPATH=add:sub
+TARGET=cacu
+CFLAGS=-Iadd -Isub -O2
+RM=rm -f
+CC=gcc
+
+$(TARGET):$(OBJS)
+	$(CC) -o $(TARGET) $(OBJS) $(CFLAGES)
+clean:
+	-$(RM) $(TARGET) 
+	-$(RM) $(OBJS) 
